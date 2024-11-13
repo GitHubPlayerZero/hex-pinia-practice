@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>甜點購物</title>
+	
+	<!-- Bootstrap -->
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
+		integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+	
+	<!-- Font Awesome -->
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+
+	<style>
+		.card-img-top {
+			object-fit: cover;
+			height: 200px;
+		}
+
+		.table-image {
+			width: 75px;
+			height: 75px;
+			object-fit: cover;
+		}
+	</style>
+</head>
+
+<body>
+
+	<div id="app">
+		<h2>{{ title }}</h2>
+		
+		<Navbar></Navbar>
+		<Cart></Cart>
+		<Products></Products>
+		
+	</div>
+	
+	
+	<!-- Bootstrap (有需要再解開) -->
+	<!-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+		integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+		crossorigin="anonymous"></script> -->
+	
+	<!-- Vue -->
+	<script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+	
+	<!-- Pinia -->
+	<!-- VueDemi，以 CDN 方式使用 Pinia 時所必需要的相依套件 -->
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/vue-demi/0.13.11/index.iife.js"></script>
+	<script>const I = VueDemi; const vueDemi = VueDemi;</script>
+	<!-- Pinia 網頁版，實戰中還是以 npm 為主，這是比較少見的使用方式 -->
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/pinia/2.0.22/pinia.iife.js"></script>
+	
+	<script type="module">
+		
+		const { createApp } = Vue;
+		const { createPinia } = Pinia;
+		
+		import Navbar from './components/Navbar.js';
+		import Cart from './components/Cart.js';
+		import Products from './components/products.js';
+		
+		const app = createApp({
+			
+			data () {
+				// console.log('Process data...');
+				return {
+					title: 'APP',
+				};
+			},
+			
+			components: {
+				Navbar,
+				Cart,
+				Products,
+			},
+		});
+		
+		const pinia = createPinia();
+		app.use(pinia);
+		
+		app.mount("#app");
+		
+	</script>
+</body>
+
+</html>

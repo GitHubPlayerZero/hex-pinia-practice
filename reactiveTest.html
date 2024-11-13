@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>响應式測試</title>
+	
+	<!-- Bootstrap -->
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
+		integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+	
+	<style>
+		.box {
+			border: 2px dashed orange;
+			padding: 10px;
+			margin-top: 20px;
+			margin-bottom: 20px;
+		}
+	</style>
+</head>
+
+<body>
+
+	<div id="app" class="container">
+		<h2>响應式測試</h2>
+		
+		<p>
+			元件 A、B 使用同樣的 store。<br>
+			當元件 A 或 B 執行累加之後，彼此的某些值都會同步改變。
+		</p>
+		
+		<div>
+			重點說明：
+			<ul>
+				<li>物件為傳參，因此無論是否有使用响應式（<code>storeToRefs</code>），都可以同步更新。</li>
+				<li>純值必須使用响應式的方式（<code>storeToRefs</code>）取出，才能有同步效果。</li>
+			</ul>
+		</div>
+		
+		<reactive-test-a></reactive-test-a>
+		<reactive-test-b></reactive-test-b>
+	</div>
+	
+	
+	<!-- Bootstrap (有需要再解開) -->
+	<!-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+		integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+		crossorigin="anonymous"></script> -->
+	
+	<!-- Vue -->
+	<script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+	
+	<!-- Pinia -->
+	<!-- VueDemi，以 CDN 方式使用 Pinia 時所必需要的相依套件 -->
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/vue-demi/0.13.11/index.iife.js"></script>
+	<script>const I = VueDemi; const vueDemi = VueDemi;</script>
+	<!-- Pinia 網頁版，實戰中還是以 npm 為主，這是比較少見的使用方式 -->
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/pinia/2.0.22/pinia.iife.js"></script>
+	
+	<script type="module">
+		
+		const { createApp } = Vue;
+		const { createPinia } = Pinia;
+		
+		import ReactiveTestA from './components/ReactiveTestA.js';
+		import ReactiveTestB from './components/ReactiveTestB.js';
+		
+		const app = createApp({
+			components: {
+				ReactiveTestA,
+				ReactiveTestB,
+			},
+		});
+		
+		const pinia = createPinia();
+		app.use(pinia);
+		
+		app.mount("#app");
+		
+	</script>
+</body>
+
+</html>
