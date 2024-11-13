@@ -1,6 +1,7 @@
 ## 簡介
 練習 Pinia。
-- Vue 3 + Pinia + Options API。
+- Vue 3 + Pinia。
+- 使用 Options API 寫法。
 - 使用 CDN。
 
 ## 購物車練習
